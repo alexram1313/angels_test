@@ -1,5 +1,6 @@
 var self = {
     stats: {},
+    
     loadData: function(){
         Papa.parse('https://raw.githubusercontent.com/alexram1313/angels_test/master/stats.csv', {
             download: true,
@@ -11,6 +12,7 @@ var self = {
             }
         });
     },
+
     initTable: function(){
         var table = document.getElementById('visualization');
         var rows = table.getElementsByClassName('data-entry');
@@ -32,17 +34,18 @@ var self = {
 
             td2.className = 'chart';
 
+            // Red meatball %
             var meatballPercDiv = document.createElement('div');
             meatballPercDiv.className = 'meatballperc';
 
             var widthPerc = (player.meatball_percent / maxPercentage) * 100;
-            var widthPercStr = widthPerc.toFixed(2) + '%';
-            meatballPercDiv.innerHTML = widthPercStr;
+            meatballPercDiv.innerHTML = '<span class="percLabel">'+player.meatball_percent+'%</span>';
             td2.appendChild(meatballPercDiv);
+            var widthPercStr = widthPerc.toFixed(2) + '%';
             meatballPercDiv.setAttribute('style', 'width: ' + widthPercStr + ';');
 
 
-
+            // Blue meatball swing %
             var meatballSwingPercDiv = document.createElement('div');
             meatballSwingPercDiv.className = 'meatballswingperc';
 
@@ -51,7 +54,9 @@ var self = {
             meatballPercDiv.appendChild(meatballSwingPercDiv);
             meatballSwingPercDiv.setAttribute('style', 'width: ' + widthSwingStr + ';');
             
-            
+            // Set tooltips
+            meatballPercDiv.setAttribute('title', player.meatball_percent + "% of " + player.last_name + "'s pitches were meatballs.");
+            meatballSwingPercDiv.setAttribute('title', widthSwingStr + " of " + player.last_name + "'s meatballs were swung at.");
 
             row.appendChild(td1);
             row.appendChild(td2);

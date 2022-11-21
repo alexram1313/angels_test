@@ -60,6 +60,12 @@ div.meatballperc
     height:100%;
     text-align: right;
     color: white;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.percLabel {
+    flex-grow: 1;
 }
 
 div.meatballswingperc
