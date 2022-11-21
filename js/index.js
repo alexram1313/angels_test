@@ -1,6 +1,6 @@
 var self = {
     stats: {},
-    
+
     loadData: function(){
         Papa.parse('https://raw.githubusercontent.com/alexram1313/angels_test/master/stats.csv', {
             download: true,
@@ -21,7 +21,7 @@ var self = {
             row.remove();
         }
 
-        var maxPercentage = self.stats.reduce((a, b) => a.meatball_percent > b.meatball_percent ? a : b).meatball_percent;
+        var maxPercentage = Math.max(...self.stats.map(s => s.meatball_percent));
 
         // Populate rows
         for (let player of self.stats){
